@@ -66,8 +66,26 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Profil</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Ayarlar</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Profilim</a>
+                                
+                                <hr class="my-1">
+                                
+                                @admin
+                                    <a href="{{ route('users.index') }}" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Kullanıcılar</a>
+                                @endadmin
+                                
+                                @superadmin
+                                    <a href="{{ route('roles.index') }}" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Roller</a>
+                                @endsuperadmin
+                                
+                                @admin
+                                    <a href="{{ route('settings.index') }}" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Ayarlar</a>
+                                @endadmin
+                                
+                                @superadmin
+                                    <a href="{{ route('logs.index') }}" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Loglar</a>
+                                @endsuperadmin
+
                                 <hr class="my-1">
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf

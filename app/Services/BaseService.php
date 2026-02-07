@@ -101,6 +101,14 @@ abstract class BaseService
     }
 
     /**
+     * Filtrelenmiş ve sayfalanmış arama
+     */
+    public function search(array $filters, int $perPage = 15): LengthAwarePaginator
+    {
+        return $this->repository->getFiltered($filters, $perPage);
+    }
+
+    /**
      * Toplam kayıt sayısı
      */
     public function count(): int

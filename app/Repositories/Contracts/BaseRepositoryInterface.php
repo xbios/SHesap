@@ -78,4 +78,9 @@ interface BaseRepositoryInterface
      * Toplam kayıt sayısı
      */
     public function count(): int;
+
+    /**
+     * Filtrelenmiş ve sayfalanmış liste getir
+     */
+    public function getFiltered(array $filters, int $perPage = 15): LengthAwarePaginator;
 }

@@ -43,6 +43,9 @@ Route::middleware('auth')->group(function () {
         return view('dashboard.index');
     })->name('dashboard');
 
+    // Stoklar CRUD
+    Route::resource('stok', \App\Http\Controllers\StokController::class);
+
     // Cari Hesaplar CRUD
     Route::resource('cari', \App\Http\Controllers\CariController::class);
 
@@ -56,20 +59,17 @@ Route::middleware('auth')->group(function () {
 | ADMIN ROUTES (Rol gerektirir)
 |--------------------------------------------------------------------------
 */
-// Route::middleware(['auth', 'role:super-admin,admin'])->prefix('admin')->name('admin.')->group(function () {
-//     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-//     Route::resource('roles', \App\Http\Controllers\Admin\RoleController::class);
-// });
-
-
-/*
-|--------------------------------------------------------------------------
-| PLACEHOLDER ROUTES (Sidebar için)
-|--------------------------------------------------------------------------
-*/
-Route::middleware('auth')->group(function () {
-    Route::get('/users', fn() => view('dashboard.index'))->name('users.index');
-    Route::get('/roles', fn() => view('dashboard.index'))->name('roles.index');
-    Route::get('/settings', fn() => view('dashboard.index'))->name('settings.index');
-    Route::get('/logs', fn() => view('dashboard.index'))->name('logs.index');
+Route::middleware(['auth'])->group(function () {
+    // Kullanıcılar
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+    
+    // Roller
+    Route::resource('roles', \App\Http\Controllers\Admin\RoleController::class);
+    
+    // Ayarlar
+    Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+    Route::post('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
+    
+    // Loglar
+    Route::get('/logs', [\App\Http\Controllers\Admin\ActivityLogController::class, 'index'])->name('logs.index');
 });

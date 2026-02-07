@@ -42,5 +42,8 @@ class DatabaseSeeder extends Seeder
 
         // SuperAdmin rolü ata
         $testUser->roles()->attach($superAdmin->id);
+        $this->call([
+            SettingSeeder::class,
+        ]);
     }
 }

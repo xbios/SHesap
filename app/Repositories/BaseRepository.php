@@ -181,4 +181,12 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFiltered(array $filters, int $perPage = 15): LengthAwarePaginator
+    {
+        return $this->query()->paginate($perPage);
+    }
 }
